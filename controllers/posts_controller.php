@@ -38,5 +38,9 @@ class PostsController extends AppController {
     }  
   }
 
+  function delete()
+  {
+  }
+
 }
 ?>
