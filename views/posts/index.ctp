@@ -18,10 +18,10 @@ foreach($post_list as $item)
 ?>
   <tr>
     <td>
-      <?php echo $item['SparechangePost']['cost']."円"; ?>
+      <?php echo h($item['SparechangePost']['cost'])."円"; ?>
     </td>
     <td>
-      <?php echo $item['SparechangePost']['comment']; ?>
+      <?php echo h($item['SparechangePost']['comment']); ?>
     </td>
 
   </tr>
