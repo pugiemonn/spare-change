@@ -1,7 +1,12 @@
-<?php
-echo $html->link("投稿する", "/posts/add");
+<ul>
+  <li>
+    <?php echo $html->link("欲しい額を投稿する", "/posts/add");?>
+  </li>
+  <li>
+    <?php echo $html->link("ユーザー一覧", "/users/" );?>
+  </li>
+</ul>
 
-?>
 <table>
   <tr>
     <th>
