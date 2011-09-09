@@ -14,7 +14,7 @@ class SparechangePost extends AppModel
       ),
       //500円から10万円まで
       'range' => array(
-        'rule' => array('range', 500, 100000.1),
+        'rule' => array('range', 499.5, 100000.1),
         'message' => 'nurupo'
       ),
     )
