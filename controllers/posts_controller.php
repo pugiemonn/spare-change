@@ -5,9 +5,11 @@ class PostsController extends AppController {
   var $sacaffold;
 
   function index() {
-    
-    $post_list = $this->SparechangePost->find('all');
-    //pr($post_list);
+    $conditions = array(
+      'order' => 'SparechangePost.id DESC',
+      'limit' => '20'
+    );    
+    $post_list = $this->SparechangePost->find('all', $conditions);
     $this->set("post_list", $post_list);
   }
 
@@ -21,6 +23,7 @@ class PostsController extends AppController {
         'cost'    => ''.$this->params['data']['Post']['cost'].'',
       );
        
+      //pr($data);
       $this->SparechangePost->set($data);
       if(!$this->SparechangePost->validates())
       {
