@@ -16,8 +16,33 @@ class UsersController extends Appcontroller {
     $this->render("/users/login");
   }
 
+  function login_cmp()
+  {
+    $conditions = array(
+      'conditions' => array(
+        'User.mail'     => $this->params['form']['mail'],
+        'User.password' => $this->params['form']['password']
+      )
+    );
+
+    $data = $this->User->find('all', $conditions);
+    //データがあるかをチェックする
+    if(count($data) == 0)
+    {
+      $this->set('login_error', true);
+      $this->render('/users/login');
+      return;
+    }
+    //セッションにログイン情報を挿入する
+    $this->Session->write('auth', $data[0]['User']);
+    //pr($this->Session->read('auth'));
+    //exit("aaa");
+    $this->flash('ログイン成功', '/posts');
+  }
+
   function delete()
   {
+    
   }
 
 }

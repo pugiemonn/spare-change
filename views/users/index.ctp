@@ -5,6 +5,9 @@
   <li>
     <?php echo $html->link("欲しい金額一覧", "/posts/");?>
   </li>
+  <li>
+    <?php echo $html->link("ログイン", "/users/login/");?>
+  </li>
 </ul>
 <table>
   <tr>
