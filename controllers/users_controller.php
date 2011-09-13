@@ -40,6 +40,12 @@ class UsersController extends Appcontroller {
     $this->flash('ログイン成功', '/posts');
   }
 
+  function logout()
+  {
+    $this->Session->delete("auth");
+    $this->flash("さようなら", "/users/login");
+  }
+
   function delete()
   {
     
