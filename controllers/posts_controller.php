@@ -14,29 +14,38 @@ class PostsController extends AppController {
   }
 
   function add() {
-
+    //セッションチェック
+    $this->checkSession();
+    $auth_data = $this->Session->read("auth");
+    //pr($auth_data);
+    //echo $auth_data['id'];
+    $this->set('auth_data', $auth_data);
+    //書き込み
     if(!empty($this->data))
     {
-      $data = array(
-        'user_id' => 1,
-        'comment' => ''.$this->params['data']['Post']['comment'].'',
-        'cost'    => ''.$this->params['data']['Post']['cost'].'',
-      );
-       
-      //pr($data);
-      $this->SparechangePost->set($data);
-      if(!$this->SparechangePost->validates())
+      if($this->params['data']['Post']['user_id'] == $auth_data['id'])
       {
-        //validateでエラーがある場合
-        $this->set("cost", $this->params['data']['Post']['cost']);
-        //pr($this->SparechangePost);
-        echo "入力エラーがあります";
-        return;
-      }
-      //モデル名が違うから指定しないといけない?
-      if($this->SparechangePost->save($data, false))
-      { 
-        $this->flash("投稿しました", "/posts");
+        $data = array(
+          'user_id' => 1,
+          'comment' => ''.$this->params['data']['Post']['comment'].'',
+          'cost'    => ''.$this->params['data']['Post']['cost'].'',
+        );
+       
+        //pr($data);
+        $this->SparechangePost->set($data);
+        if(!$this->SparechangePost->validates())
+        {
+          //validateでエラーがある場合
+          $this->set("cost", $this->params['data']['Post']['cost']);
+          //pr($this->SparechangePost);
+          echo "入力エラーがあります";
+          return;
+        }
+        //モデル名が違うから指定しないといけない?
+        if($this->SparechangePost->save($data, false))
+        {   
+          $this->flash("投稿しました", "/posts");
+        }
       }
     }  
   }
