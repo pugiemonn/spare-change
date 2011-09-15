@@ -31,14 +31,13 @@ class PostsController extends AppController {
           'cost'    => ''.$this->params['data']['Post']['cost'].'',
         );
        
-        //pr($data);
+//        pr($data);
         $this->SparechangePost->set($data);
         if(!$this->SparechangePost->validates())
         {
           //validateでエラーがある場合
           $this->set("cost", $this->params['data']['Post']['cost']);
-          //pr($this->SparechangePost);
-          echo "入力エラーがあります";
+          //echo "入力エラーがあります";
           return;
         }
         //モデル名が違うから指定しないといけない?

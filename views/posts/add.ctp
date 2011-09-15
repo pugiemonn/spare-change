@@ -5,8 +5,9 @@ echo $form->create('Post');
 //echo $form->select('user_id', array('1' => 1), 1);
 echo $form->hidden('user_id', array('value' => ''.$auth_data["id"].''));
 echo $form->input('comment', array('label' => 'お金の使い道'));
+echo $form->error('SparechangePost.comment');
 echo $form->input('cost', array('label' => '金額(500円から100000円まで)'));
-echo $form->error('cost', 'URLが正しくありません');
+echo $form->error('SparechangePost.cost');
 echo $form->submit();
 echo $form->end();
 ?>
