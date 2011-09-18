@@ -24,7 +24,7 @@ class SparechangePost extends AppModel
       //500円から10万円まで
       'range' => array(
         'rule' => array('range', 499.5, 100000.1),
-        'message' => '500から100000の自然数を半角で入力てください'
+        'message' => '500以上100000以下の自然数を半角で入力してください'
       ),
     )
   );
