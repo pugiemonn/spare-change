@@ -26,7 +26,7 @@ class PostsController extends AppController {
       if($this->params['data']['Post']['user_id'] == $auth_data['id'])
       {
         $data = array(
-          'user_id' => 1,
+          'user_id' => ''.$this->params['data']['Post']['user_id'].'',
           'comment' => ''.$this->params['data']['Post']['comment'].'',
           'cost'    => ''.$this->params['data']['Post']['cost'].'',
         );
@@ -51,6 +51,20 @@ class PostsController extends AppController {
 
   function delete()
   {
+  }
+
+  function user($id=null)
+  {
+    $this->SparechangePost->id = $id;
+    //pr($id);
+    $conditions = array(
+      'conditions' => array('SparechangePost.user_id' => ''.$id.'',),
+      'order'      => 'SparechangePost.id DESC',
+      'limit'      => '20'
+    );
+    $post_list = $this->SparechangePost->find('all', $conditions);
+    //pr($post_list);
+    $this->set('post_list', $post_list);
   }
 
 }
