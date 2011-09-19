@@ -22,7 +22,7 @@ foreach($users as $user)
   <tr>
     <td>
 <?php
-  echo h($user['User']['name']);
+  echo $html->link("".h($user['User']['name'])."", "/posts/user/".$user['User']['id']."");
 ?>
     </td>
   </tr>
