@@ -28,10 +28,12 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+		echo $this->Html->css(array('cake.generic', 'sparechange'));
 
 		echo $scripts_for_layout;
 	?>
+
+
 </head>
 <body>
 	<div id="container">
@@ -42,7 +44,7 @@
             -->
             </h1>
         <?php
-            if($auth)
+            if(isset($auth))
             {
                 echo $auth['name']."さん";
                 echo $html->link("ログアウト", "/users/logout");
