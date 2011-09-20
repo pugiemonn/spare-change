@@ -6,6 +6,7 @@ class UsersController extends Appcontroller {
   function index()
   {
     $this->set('users', $this->User->find('all'));
+    pr($this->User->find('all'));
     $this->render('/users/index');
   }
 
@@ -36,8 +37,8 @@ class UsersController extends Appcontroller {
     //セッションにログイン情報を挿入する
     $this->Session->write('auth', $data[0]['User']);
     //pr($this->Session->read('auth'));
-    //exit("aaa");
-    $this->flash('ログイン成功', '/posts');
+    //
+    $this->flash('ログイン成功', '/posts/user/'.$data[0]['User']['id'].'');
   }
 
   function logout()

@@ -14,32 +14,6 @@
   </li>
 </ul>
 <br />
-<div class="posts">
-  <div class="postBox">
-    <div class="postCost">
-      <p>1,000<span>円</span></p>
-    </div>
-    <div class="postText">
-      <ul>
-        <li>
-          <a href="#">pugiemonn</a>
-        </li>
-      </ul>
-      <p>ぷぎですがポケモン買いたいです</p>
-      <ul>
-        <!--
-        <li>
-          <a href="#">コメントする</a>
-        </li>
-        -->
-        <li>
-          <a href="#">2011-09-19 16:12:47</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <br class="clear" />
-</div>
 <?php
 foreach($post_list as $post) {
 ?>
@@ -51,10 +25,10 @@ foreach($post_list as $post) {
     <div class="postText">
       <ul>
         <li>
-          <a href="#">pugiemonn</a>
+          <?php echo $html->link("".h($post['User']['name'])."", "/posts/user/".$post['SparechangePost']['user_id'].""); ?>
         </li>
       </ul>
-      <p>ぷぎですがポケモン買いたいです</p>
+      <p><?php echo h($post['SparechangePost']['comment']); ?></p>
       <ul>
         <!--
         <li>
@@ -62,7 +36,7 @@ foreach($post_list as $post) {
         </li>
         -->
         <li>
-          <a href="#">2011-09-19 16:12:47</a>
+          <?php echo $html->link("".h($post['SparechangePost']['created'])."", "/posts/view/".$post['SparechangePost']['id'].""); ?>
         </li>
       </ul>
     </div>

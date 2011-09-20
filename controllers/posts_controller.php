@@ -9,8 +9,12 @@ class PostsController extends AppController {
       'order' => 'SparechangePost.id DESC',
       'limit' => '20'
     );    
-    $post_list = $this->SparechangePost->find('all', $conditions);
-    $this->set("post_list", $post_list);
+    //$post_list = $this->SparechangePost->find('all', $conditions);
+    //$post_list = $this->SparechangePost->find('all');
+    $post_list = $this->SparechangePost->findTop();
+    //pr($post_list);
+    //$this->set("post_list", $post_list);
+    $this->set(compact("post_list"));
   }
 
   function add() {
@@ -66,6 +70,12 @@ class PostsController extends AppController {
     //pr($post_list);
     $this->set('post_list', $post_list);
   }
+
+  function view($id=null)
+  {
+    $post_list = $this->SparechangePost->findAllById($id);
+    $this->set(compact('post_list'));
+  }  
 
 }
 ?>
