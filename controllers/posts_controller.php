@@ -66,7 +66,8 @@ class PostsController extends AppController {
       'order'      => 'SparechangePost.id DESC',
       'limit'      => '20'
     );
-    $post_list = $this->SparechangePost->find('all', $conditions);
+    //$post_list = $this->SparechangePost->find('all', $conditions);
+    $post_list = $this->SparechangePost->findUserPost($id);
     //pr($post_list);
     $this->set('post_list', $post_list);
   }

@@ -54,16 +54,6 @@ class SparechangePost extends AppModel
       ),
       'limit'      => '20',
     );
-/*
-    pr($options);
-    //if(isset($user)) {
-      $conditions = array('conditions' => array('`User`.`id`' => '2' 
-      ));
-      //配列に追加
-      $options['condtions'] = array('`User`.`id`' => '2');
-    //}
-    pr($options);
-*/
    // pr($options);
     return $this->find('all', $options);
   }
@@ -87,6 +77,24 @@ class SparechangePost extends AppModel
     return $this->find('all', $options);
   }
 
+  function findUserPost($id=1)
+  {
+    $options = array(
+      'conditions' => array('`SparechangePost`.`user_id`' => $id),
+      //'order'      => 'SparechangePost.id DESC',
+      'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
+      'joins'      => array(
+        array(
+          'type'       => 'LEFT',
+          'table'      => '`users`',
+          'alias'      => 'User',
+          'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
+        )
+      ),
+      //'limit'      => '20',
+    );
+    return $this->find('all', $options);
+  }
 }
 
 ?>
