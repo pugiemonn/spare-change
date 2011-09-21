@@ -39,9 +39,9 @@ class SparechangePost extends AppModel
   );
 
   //トップを表示するときに呼ばれる
-  function findTop($user=null) {
+  function findTop($user=1) {
     $options = array(
-    //  'conditions' => array('`User`.`id`' => '2'),
+      //'conditions' => array('`User`.`id`' => $id),
       'order'      => 'SparechangePost.id DESC',
       'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
       'joins'      => array(
@@ -67,6 +67,26 @@ class SparechangePost extends AppModel
    // pr($options);
     return $this->find('all', $options);
   }
+
+  function findView($id=1)
+  {
+    $options = array(
+      'conditions' => array('`SparechangePost`.`id`' => $id),
+      //'order'      => 'SparechangePost.id DESC',
+      'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
+      'joins'      => array(
+        array(
+          'type'       => 'LEFT',
+          'table'      => '`users`',
+          'alias'      => 'User',
+          'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
+        )
+      ),
+      //'limit'      => '20',
+    );
+    return $this->find('all', $options);
+  }
+
 }
 
 ?>

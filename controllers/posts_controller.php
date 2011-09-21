@@ -4,7 +4,7 @@ class PostsController extends AppController {
   var $uses = array("SparechangePost");
   var $sacaffold;
 
-  function index() {
+  function index($id=null) {
     $conditions = array(
       'order' => 'SparechangePost.id DESC',
       'limit' => '20'
@@ -73,7 +73,8 @@ class PostsController extends AppController {
 
   function view($id=null)
   {
-    $post_list = $this->SparechangePost->findAllById($id);
+    $post_list = $this->SparechangePost->findView($id);
+    //pr($post_list);
     $this->set(compact('post_list'));
   }  
 
