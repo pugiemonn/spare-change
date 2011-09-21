@@ -9,24 +9,20 @@
     <?php echo $html->link("ログイン", "/users/login/");?>
   </li>
 </ul>
-<table>
-  <tr>
-    <th>
-      name
-    </th>
-  </tr>
+<br />
+
+<div class="">
 <?php
 foreach($users as $user)
 {
 ?>
-  <tr>
-    <td>
-<?php
-  echo $html->link("".h($user['User']['name'])."", "/posts/user/".$user['User']['id']."");
-?>
-    </td>
-  </tr>
+  <div class="userName">
+    <?php
+      echo $html->link("".h($user['User']['name'])."", "/posts/user/".$user['User']['id']."");
+    ?>
+  </div>
 <?php
 }
 ?>
-</table>
+</div>
+
