@@ -95,6 +95,23 @@ class SparechangePost extends AppModel
     );
     return $this->find('all', $options);
   }
+
+  function findUserTotalAmount($id=1)
+  {
+    $options = array(
+      'conditions' => array('`SparechangePost`.`user_id`' => $id),
+      'fields'     => array(
+        '`SparechangePost`.`user_id`',
+        'SUM(`SparechangePost`.`cost`) AS `cost`',
+      ),
+      'group' => array('`SparechangePost`.`user_id`'),
+    );
+    return $this->find('all', $options);
+  }
+
+  function findUserPostCount($id=1)
+  {
+  }
 }
 
 ?>

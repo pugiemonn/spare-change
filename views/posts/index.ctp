@@ -45,5 +45,7 @@ foreach($post_list as $post) {
 </div>
 <?php
 }
+unset($post_list);
+unset($post);
 ?>
 
