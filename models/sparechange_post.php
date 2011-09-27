@@ -81,7 +81,7 @@ class SparechangePost extends AppModel
   {
     $options = array(
       'conditions' => array('`SparechangePost`.`user_id`' => $id),
-      //'order'      => 'SparechangePost.id DESC',
+      'order'      => 'SparechangePost.id DESC',
       'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
       'joins'      => array(
         array(
