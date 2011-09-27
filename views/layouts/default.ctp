@@ -60,6 +60,7 @@
 
 			<?php echo $this->Session->flash(); ?>
 
+            <?php echo $this->element('topBar'); ?>
 			<?php echo $content_for_layout; ?>
 
 		</div>
