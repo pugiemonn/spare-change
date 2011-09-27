@@ -6,8 +6,13 @@ class UsersController extends Appcontroller {
   function index()
   {
     $this->set('users', $this->User->find('all'));
-    pr($this->User->find('all'));
+    //pr($this->User->find('all'));
     $this->render('/users/index');
+  }
+
+  function edit()
+  {
+    $this->render('/users/edit');  
   }
 
   function login()
@@ -44,7 +49,7 @@ class UsersController extends Appcontroller {
   function logout()
   {
     $this->Session->delete("auth");
-    $this->flash("さようなら", "/users/login");
+    $this->flash("さようなら", "/");
   }
 
   function delete()
