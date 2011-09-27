@@ -2,14 +2,15 @@
   <li>
     <?php echo $html->link("欲しい額を投稿する", "/posts/add");?>
   </li>
+<!--
   <li>
     <?php echo $html->link("投稿一覧", "/posts/" );?>
   </li>
   <li>
     <?php echo $html->link("ユーザー一覧", "/users/" );?>
   </li>
+-->
 </ul>
-
 <br />
 
 <div class="profileInfo">

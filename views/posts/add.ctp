@@ -1,6 +1,5 @@
 <?php
 //pr($auth_data);
-echo $html->link('投稿一覧', '/posts');
 echo $form->create('Post');
 //echo $form->select('user_id', array('1' => 1), 1);
 echo $form->hidden('user_id', array('value' => ''.$auth_data["id"].''));
