@@ -29,7 +29,7 @@
 <table class="userData">
   <tr>
     <th>
-      欲しい額合計
+      欲しがっている金額合計
     </th>
     <th>
       投稿数
@@ -59,6 +59,7 @@ foreach($post_list as $post) {
   <div class="postBox">
     <div class="postCost">
       <p><?php echo h(number_format($post['SparechangePost']['cost'])); ?><span>円</span></p>
+      <p class="kaomoji">( ﾟдﾟ)ﾎｽｨ…</p>
     </div>
     <div class="postText">
       <ul>

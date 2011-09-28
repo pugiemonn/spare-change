@@ -2,6 +2,7 @@
   <li>
     <?php echo $html->link("欲しい額を投稿する", "/posts/add");?>
   </li>
+<!--
   <?php if($this->Session->read("auth")){
     $auth_data = $this->Session->read("auth");
   ?>
@@ -12,6 +13,7 @@
   <li>
     <?php echo $html->link("ユーザー一覧", "/users/" );?>
   </li>
+-->
 </ul>
 <br />
 <?php
@@ -21,6 +23,7 @@ foreach($post_list as $post) {
   <div class="postBox">
     <div class="postCost">
       <p><?php echo h(number_format($post['SparechangePost']['cost'])); ?><span>円</span></p>
+      <p class="kaomoji">( ﾟдﾟ)ﾎｽｨ…</p>
     </div>
     <div class="postText">
       <ul>

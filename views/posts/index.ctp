@@ -1,3 +1,6 @@
+<?php
+//pr($example);
+?>
 <ul>
   <li>
     <?php echo $html->link("欲しい額を投稿する", "/posts/add");?>
@@ -23,6 +26,7 @@ foreach($post_list as $post) {
   <div class="postBox">
     <div class="postCost">
       <p><?php echo h(number_format($post['SparechangePost']['cost'])); ?><span>円</span></p>
+      <p class="kaomoji">( ﾟдﾟ)ﾎｽｨ…</p>
     </div>
     <div class="postText">
       <ul>
@@ -49,5 +53,9 @@ foreach($post_list as $post) {
 }
 unset($post_list);
 unset($post);
+?>
+<?php
+//echo $paginator->numbers(true);
+//  echo $this->paginator->counter();
 ?>
 
