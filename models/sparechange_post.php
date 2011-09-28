@@ -1,16 +1,9 @@
 <?php
 class SparechangePost extends AppModel
 {
-  var $name = "SparechangePost";
-/*
-  var $belongsTo  = array(
-    'User' => array(
-      'className'  => 'User',
-      //'joinTable'  => 'users', 
-      'foreignKey' => 'id',
-      //'fields'     => array('id', 'name'),
-    )
-  );*/
+  var $name     = 'SparechangePost';
+  public $order = 'SparechangePost.id DESC';  
+
   var $validate = array(
     'user_id' => 'notEmpty',
     'comment' => array(
@@ -38,62 +31,31 @@ class SparechangePost extends AppModel
     )
   );
 
-  //トップを表示するときに呼ばれる
-  function findTop($user=1) {
-    $options = array(
-      //'conditions' => array('`User`.`id`' => $id),
-      'order'      => 'SparechangePost.id DESC',
-      'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
-      'joins'      => array(
-        array(
-          'type'       => 'LEFT',
-          'table'      => '`users`',
-          'alias'      => 'User',
-          'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
-        )
-      ),
-      'limit'      => '20',
-    );
-   // pr($options);
-    return $this->find('all', $options);
-  }
-
-  function findView($id=1)
-  {
-    $options = array(
-      'conditions' => array('`SparechangePost`.`id`' => $id),
-      //'order'      => 'SparechangePost.id DESC',
-      'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
-      'joins'      => array(
-        array(
-          'type'       => 'LEFT',
-          'table'      => '`users`',
-          'alias'      => 'User',
-          'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
-        )
-      ),
-      //'limit'      => '20',
-    );
-    return $this->find('all', $options);
-  }
-
-  function findUserPost($id=1)
-  {
-    $options = array(
-      'conditions' => array('`SparechangePost`.`user_id`' => $id),
-      'order'      => 'SparechangePost.id DESC',
-      'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
-      'joins'      => array(
-        array(
-          'type'       => 'LEFT',
-          'table'      => '`users`',
-          'alias'      => 'User',
-          'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
-        )
-      ),
-      //'limit'      => '20',
-    );
-    return $this->find('all', $options);
+  //カスタムfind
+  public function find($type, $options = array()) {
+    switch($type) {
+      case 'index':
+      case 'user' :
+      case 'view' :
+        return parent::find('all', array_merge(
+          array(
+            'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
+            'joins'      => array(
+              array(
+                'type'       => 'LEFT',
+                'table'      => '`users`',
+                'alias'      => 'User',
+                'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
+              )
+            ),
+            //Limitはコントローラから渡すことにした
+          ),
+          $options
+          )
+        );
+      default:
+        return parent::find($type, $options);
+    }
   }
 
   function findUserTotalAmount($id=1)

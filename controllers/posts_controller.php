@@ -3,17 +3,25 @@ class PostsController extends AppController {
 
   var $uses = array("SparechangePost");
   var $sacaffold;
+  var $paginate = array(
+    'limit' => 20,
+    'order' => array(
+      'SparechangePost.id' => 'DESC'
+    ) 
+  );
 
-  function index($id=null) {
-    $conditions = array(
-      'order' => 'SparechangePost.id DESC',
-      'limit' => '20'
-    );    
-    //$post_list = $this->SparechangePost->find('all', $conditions);
-    //$post_list = $this->SparechangePost->find('all');
-    $post_list = $this->SparechangePost->findTop();
-    //pr($post_list);
-    //$this->set("post_list", $post_list);
+  protected $_types = array(
+    'index' => array('index', array('limit' => '20')),//index
+    'user'  => array('user', array('limit' => '20')), 
+    'view'  => array('view', array('limit' => '1')),
+  );
+
+  function index() {
+    //アクション名を取得
+    $options  = $this->_types[$this->params['action']];
+    $post_list = $this->SparechangePost->find($options[0], $options[1]);
+    //$this->paginate = $conditions;
+    $this->set('post_list', $this->paginate('SparechangePost'));
     $this->set(compact("post_list"));
   }
 
@@ -73,16 +81,20 @@ class PostsController extends AppController {
     $user_data['amount']  = $amount[0][0]['cost']; 
     $user_data['count']   = $count;
     $user_data['average'] = ceil($amount[0][0]['cost'] / $count); 
-    $post_list = $this->SparechangePost->findUserPost($id);
-    //pr($post_list);
+    $options  = $this->_types[$this->params['action']];
+    //投稿のidを渡す
+    $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`user_id`' => $id)));
+    $post_list = $this->SparechangePost->find($options[0], $options[1]);
     $this->set(compact('user_data'));
     $this->set('post_list', $post_list);
   }
 
   function view($id=null)
   {
-    $post_list = $this->SparechangePost->findView($id);
-    //pr($post_list);
+    $options  = $this->_types[$this->params['action']];
+    //投稿のidを渡す
+    $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`id`' => $id)));
+    $post_list = $this->SparechangePost->find($options[0], $options[1]);
     $this->set(compact('post_list'));
   }  
 
