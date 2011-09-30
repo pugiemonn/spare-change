@@ -2,16 +2,33 @@
 class UsersController extends Appcontroller {
   var $name = "User";
   var $scaffold;
+  var $paginate = array(
+    'limit' => 2,
+    'order' => array(
+      'User.id' => 'desc'
+    ) 
+  );
 
   function index()
   {
-    $this->set('users', $this->User->find('all'));
+    $this->set('users', $this->paginate());
+    $options = array(
+      //'conditons' =>
+      'fields' => array(
+        'User.id',
+        'User.name',
+      ),
+      'limit'  => '2',
+    );
+    $this->set('users', $this->User->find('all', $options));
     //pr($this->User->find('all'));
     $this->render('/users/index');
   }
 
-  function edit()
+  function edit($id=null)
   {
+    $this->data = $this->User->read();
+    pr($this->data);
     $this->render('/users/edit');  
   }
 
@@ -26,10 +43,21 @@ class UsersController extends Appcontroller {
   {
     $conditions = array(
       'conditions' => array(
-        'User.mail'     => $this->params['form']['mail'],
-        'User.password' => $this->params['form']['password']
+        'User.mail'     => $this->data['User']['mail'],
+        'User.password' => $this->data['User']['password']
       )
     );
+    $data = array(
+        'mail'     => $this->data['User']['mail'],
+        'password' => $this->data['User']['password']
+      );
+    //validateするために値をセットする
+    $this->User->set($data);
+    if(!$this->User->validates()) {
+      //値がおかしかった場合はリダイレクト
+      $this->render('/users/login');
+      return ;
+    }
 
     $data = $this->User->find('all', $conditions);
     //データがあるかをチェックする

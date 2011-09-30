@@ -12,9 +12,23 @@ class User extends AppModel {
     ) 
   );
   var $validate = array(
-    'name'     => array('rule' => 'notEmpty'),
-    'mail'     => array('rule' => 'email'),
-    'password' => array('rule' => 'notEmpty')
+    'name'     => array(
+      'rule'    => 'notEmpty',
+      'message' => 'aaa',
+    ),
+    
+    'mail'     => array(
+      'isMail' => array(
+        'rule'    => 'email',
+        'message' => 'メールアドレスを入力してください。'
+      )
+    ),
+
+    'password' => array(
+      'rule'    => 'notEmpty',
+      'message' => 'パスワードを入力してください'
+    ),
+    //'account'  => array(),
   );
 }
 
