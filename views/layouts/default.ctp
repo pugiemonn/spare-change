@@ -47,7 +47,7 @@
             if(isset($auth))
             {
                 //pr($auth);
-                echo $auth['name']."さん";
+                echo h($auth['name'])."さん";
                 echo $html->link("ログアウト", "/users/logout");
             }
             else
