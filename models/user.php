@@ -13,22 +13,47 @@ class User extends AppModel {
   );
   var $validate = array(
     'name'     => array(
-      'rule'    => 'notEmpty',
-      'message' => 'aaa',
+/*
+      'notEmpty' => array(
+        'rule'    => 'notEmpty',
+        'message' => '名前を入力してください。',
+      ),*/
+      'alphanumeric' => array(
+        'rule'     => array('custom', '/^[a-z\d]*$/i'),
+        'required' => true,
+        'message'  => '半角英数字を入力してください',
+      ),
+      'between' => array(
+        'rule'    => array('between', 5, 15), 
+        'message' => '5文字から15文字までにしてください',
+      ),
     ),
     
     'mail'     => array(
+      'between' => array(
+        'rule'    => array('between', 5, 50), 
+        'message' => '5文字から50文字までにしてください',
+      ),
       'isMail' => array(
         'rule'    => 'email',
         'message' => 'メールアドレスを入力してください。'
-      )
+      ),
     ),
 
     'password' => array(
-      'rule'    => 'notEmpty',
-      'message' => 'パスワードを入力してください'
+      'alphanumeric' => array(
+        'rule'     => array('custom', '/^[a-z\d]*$/i'),
+        'required' => true,
+        'message' => '半角英数字を入力してください'
+      ),
+      'between' => array(
+        'rule'    => array('between', 5, 15), 
+        'message' => '5文字から15文字までにしてください',
+      ),
     ),
-    //'account'  => array(),
+    'account'  => array(
+      'rule' => array('between', 5, 200),
+    ),
   );
 }
 

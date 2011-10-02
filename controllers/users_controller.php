@@ -25,6 +25,31 @@ class UsersController extends Appcontroller {
     $this->render('/users/index');
   }
 
+  function add() {
+    if(!empty($this->data)) {
+      //モデルにdataをセット
+      $this->User->set($this->data);
+      if(!$this->User->validates())
+      {
+        //入力に不備が合った場合の処理
+        $this->render('/users/add');
+        return;
+      }
+
+//        pr($this->data);
+//        pr($this->User->find('all', $this->data));
+//        exit();  
+      //ユーザーデータの書き込み
+      if($this->User->save($this->data))
+      {
+        //セッションへ書き込み
+        
+        //ユーザーのページへリダイレクト
+        $this->flash('ユーザー登録が完了しました。', '/posts/user/');
+      }
+    }
+  }
+
   function edit($id=null)
   {
     $this->data = $this->User->read();
