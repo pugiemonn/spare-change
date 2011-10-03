@@ -19,7 +19,9 @@
   </div>
   <div class="profileDetails">
     <div class="profileName">
-      <?php echo $html->link("".h($post_list[0]['User']['name'])."", "/posts/user/".$post_list[0]['SparechangePost']['user_id'].""); ?>
+      <?php //pr($user_info); ?>
+      <?php //echo $html->link("".h($post_list[0]['User']['name'])."", "/posts/user/".$post_list[0]['SparechangePost']['user_id'].""); ?>
+      <?php echo $html->link("".h($user_info['User']['name'])."", "/posts/user/".$user_info['User']['id'].""); ?>
     </div>
     <div class="profileAccount">
     </div>

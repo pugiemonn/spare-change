@@ -1,13 +1,21 @@
 <?php
 class PostsController extends AppController {
 
-  var $uses = array("SparechangePost");
+  var $uses = array("SparechangePost", "User");
   var $sacaffold;
   var $paginate = array(
     'limit' => 20,
-    'order' => array(
-      'SparechangePost.id' => 'DESC'
-    ) 
+    //'order' => array('SparechangePost.id' => 'asc'),
+     'fields'     => array('`SparechangePost`.`id`', '`SparechangePost`.`cost`', '`SparechangePost`.`comment`', '`SparechangePost`.`user_id`', '`SparechangePost`.`created`', '`User`.`name`'),
+     'joins'      => array(
+       array(
+         'type'       => 'LEFT',
+         'table'      => '`users`',
+         'alias'      => 'User',
+         'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
+       )
+     )
+ 
   );
 
   protected $_types = array(
@@ -16,13 +24,25 @@ class PostsController extends AppController {
     'view'  => array('view', array('limit' => '1')),
   );
 
+/*
+  $user_data = array(
+      'amount'  => 0, 
+      'count'   => 0,
+      'average' => 0,
+  );
+*/
   function index() {
+
+    //pr($this->paginate());
+    //pr($this->paginate);
     //アクション名を取得
     $options  = $this->_types[$this->params['action']];
+    //$post_list = $this->SparechangePost->find($options[0], $options[1]);
     $post_list = $this->SparechangePost->find($options[0], $options[1]);
     //$this->paginate = $conditions;
-    $this->set('post_list', $this->paginate('SparechangePost'));
-    $this->set(compact("post_list"));
+    //$this->set('data', $this->paginate());
+    //$post_list = $this->paginate();
+    $this->set(compact('post_list'));
   }
 
   function add() {
@@ -45,6 +65,8 @@ class PostsController extends AppController {
        
 //        pr($data);
         $this->SparechangePost->set($data);
+        //pr($this->SparechangePost);
+        //exit();
         if(!$this->SparechangePost->validates())
         {
           //validateでエラーがある場合
@@ -76,15 +98,26 @@ class PostsController extends AppController {
     );
     //カウント数を取得
     $count     = $this->SparechangePost->find('count', $options);
-    $amount    = $this->SparechangePost->findUserTotalAmount($id);
-    //ユーザーの数値情報を作る
-    $user_data['amount']  = $amount[0][0]['cost']; 
-    $user_data['count']   = $count;
-    $user_data['average'] = ceil($amount[0][0]['cost'] / $count); 
+    //すでに投稿がある場合
+    if($count>0) {
+      $amount    = $this->SparechangePost->findUserTotalAmount($id);
+      //ユーザーの数値情報を作る
+      $user_data['amount']  = $amount[0][0]['cost']; 
+      $user_data['count']   = $count;
+      $user_data['average'] = ceil($amount[0][0]['cost'] / $count); 
+    }
+    //投稿がまだ無い場合、または、ユーザー登録した瞬間など
+    else
+    {
+      $user_data['amount']  = 0; 
+      $user_data['count']   = 0;
+      $user_data['average'] = 0; 
+    }
     $options  = $this->_types[$this->params['action']];
     //投稿のidを渡す
     $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`user_id`' => $id)));
     $post_list = $this->SparechangePost->find($options[0], $options[1]);
+    $this->set('user_info', $this->User->find('first', array('conditions' => array('`User`.`id`' => $id))));
     $this->set(compact('user_data'));
     $this->set('post_list', $post_list);
   }
