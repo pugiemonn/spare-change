@@ -9,6 +9,10 @@ class UsersController extends Appcontroller {
     ) 
   );
 
+  protected $_types = array(
+    'add' => array('add', array()),
+  );
+
   function index()
   {
     $this->set('users', $this->paginate());
@@ -36,18 +40,44 @@ class UsersController extends Appcontroller {
         return;
       }
 
-//        pr($this->data);
-//        pr($this->User->find('all', $this->data));
-//        exit();  
+      //pr($this->data);
+      //アクションを判定する
+      $options = $this->_types[$this->params['action']];
+      $options[1] = array_merge($options[1], array(
+        'conditions' => array(
+          '`User`.`mail`'     => $this->data['User']['mail'],
+            //'`User`.`password`' => $this->data['User']['password'],
+        )
+        )
+      );
+      //メールアドレスが登録されているかをチェックする
+      //$count = $this->User->find($options[0], $options[1]);
+      $count = $this->User->find('count', $options[1]);
+      //pr($count);
+      if($count >= 1)
+      {
+        //メールアドレスが重複している
+        $this->set('mailOverlap', true); 
+        $this->render('/users/add');
+        return ;
+      }
+      //exit("aaaaa");  
       //ユーザーデータの書き込み
       if($this->User->save($this->data))
       {
+        $user_data  = $this->User->find('first', $options[1]);
+        //pr($user_data);
+        //exit("bbb");  
         //セッションへ書き込み
+        $this->Session->write('auth', $user_data['User']);
         
         //ユーザーのページへリダイレクト
-        $this->flash('ユーザー登録が完了しました。', '/posts/user/');
+        $this->flash('ユーザー登録が完了しました。', '/posts/user/'.$user_data['User']['id'].'');
+        //returnと書くといいですね。
+        return ;
       }
     }
+    $this->render('/users/add');
   }
 
   function edit($id=null)

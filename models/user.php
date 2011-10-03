@@ -55,6 +55,23 @@ class User extends AppModel {
       'rule' => array('between', 5, 200),
     ),
   );
+
+  public function find($type, $options = array()) {
+    switch($type) {
+      case 'add':
+        //exit("aaaa");
+        return parent::find('find', array_merge(
+          array(
+            //'fields' => array('id', 'name', 'mail'), 
+          ),
+          $options
+          )
+        );
+      default:
+        //find('all', $options);みたいな呼び方するから動く気がする
+        return parent::find($type, $options);
+    } 
+  }
 }
 
 ?>
