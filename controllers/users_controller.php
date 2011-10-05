@@ -82,8 +82,35 @@ class UsersController extends Appcontroller {
 
   function edit($id=null)
   {
-    $this->data = $this->User->read();
-    pr($this->data);
+    //セッションチェック
+    $this->checkSession();
+    //セッションデータを読み込み
+    $user_data = $this->Session->read('auth');
+    //pr($user_data); 
+    //$this->set(compact(user_data));
+    if(empty($this->data))
+    {
+      //フォームから入力が無い場合
+      $this->User->id = $user_data['id'];
+      $this->data = $this->User->read();
+    }
+    //口座情報を書き込み
+    else
+    {
+      $this->User->set($this->data);
+      //バリデーション
+      if(!$this->User->validates())
+      {
+        return ;
+      }
+      //保存      
+      if($this->User->save($this->data['User']))
+      {
+        $this->flash('更新されました', '/posts/user/'.$user_data['id'].'');
+        return;
+      }
+    } 
+    //pr($this->data);
     $this->render('/users/edit');  
   }
 

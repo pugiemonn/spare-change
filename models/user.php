@@ -20,7 +20,7 @@ class User extends AppModel {
       ),*/
       'alphanumeric' => array(
         'rule'     => array('custom', '/^[a-z\d]*$/i'),
-        'required' => true,
+ //       'required' => true,
         'message'  => '半角英数字を入力してください',
       ),
       'between' => array(
@@ -43,16 +43,18 @@ class User extends AppModel {
     'password' => array(
       'alphanumeric' => array(
         'rule'     => array('custom', '/^[a-z\d]*$/i'),
-        'required' => true,
+ //       'required' => true,
         'message' => '半角英数字を入力してください'
       ),
-      'between' => array(
+/*      'between' => array(
         'rule'    => array('between', 5, 15), 
-        'message' => '5文字から15文字までにしてください',
+        'message' => '5文字から15文字までを入力してください',
       ),
+*/
     ),
     'account'  => array(
-      'rule' => array('between', 5, 200),
+      'rule'    => array('between', 0, 200),
+      'message' => array('文字数が多すぎます。２００以内に'),
     ),
   );
 

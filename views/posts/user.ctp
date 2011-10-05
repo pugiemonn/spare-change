@@ -24,6 +24,7 @@
       <?php echo $html->link("".h($user_info['User']['name'])."", "/posts/user/".$user_info['User']['id'].""); ?>
     </div>
     <div class="profileAccount">
+      <?php echo h($user_info['User']['account']); ?>
     </div>
   </div>
   <br class="clear" />
