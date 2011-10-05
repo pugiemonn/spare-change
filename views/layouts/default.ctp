@@ -28,7 +28,8 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css(array('cake.generic', 'sparechange'));
+		//echo $this->Html->css(array('cake.generic', 'sparechange'));
+		echo $this->Html->css(array('sparechange', 'bootstrap'));
 
 		echo $scripts_for_layout;
 	?>
