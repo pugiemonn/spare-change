@@ -37,35 +37,14 @@
 
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1>
-                <?php echo $html->link("SpareChange", "/"); ?>
-            <!--<?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?>
-            -->
-            </h1>
-        <?php
-            if(isset($auth))
-            {
-                //pr($auth);
-                echo h($auth['name'])."さん";
-                echo $html->link("ログアウト", "/users/logout");
-            }
-            else
-            {
-                echo $html->link("ログイン", "/users/login");
-            }
-        ?>
-		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-            <?php echo $this->element('topBar'); ?>
-			<?php echo $content_for_layout; ?>
-
-		</div>
-		<div id="footer">
+<div id="">
+  <?php //echo $this->Session->flash(); ?>
+  <?php echo $this->element('topBar'); ?>
+  <?php echo $this->element('header'); ?>
+  <div class="container">
+    <?php echo $content_for_layout; ?>
+  </div>
+		<div id="">
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
 					'http://www.cakephp.org/',

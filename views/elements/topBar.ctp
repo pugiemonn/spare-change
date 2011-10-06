@@ -1,32 +1,47 @@
-<div id="topBar">
-  <div class="staticLink">
-    <a href="/">sparechange</a> 
-  </div>
-  <div class="activeLink">
-    <?php echo $html->link('Home', '/'); ?>
-    <?php
-      //echo($this->Session->read('auth'));
-      //pr($user_info);
-      //authがある場合
-      if(isset($auth)) {
-        echo $html->link('Profile', '/posts/user/'.$auth['id'].'');
-          //コントローラ、アクション、セッションをチェック
-          if($this->params['controller'] === 'posts'  && $this->params['action'] === 'user' && $this->params['pass'][0] == $user_info['User']['id'])
-          {
-            echo "&nbsp;";
-            echo $html->link('edit', '/users/edit/');
+<div class="topbar">
+  <div class="topbar-inner">
+
+    <div id="" class="container">
+      <a href="/" class="brand">sparechange</a> 
+      <ul class="nav">
+        <?php
+          echo '<li>';
+          echo $html->link('Home', '/');
+          echo '</li>';
+        ?>
+        <?php
+          //echo($this->Session->read('auth'));
+          //pr($user_info);
+          //authがある場合
+          if(isset($auth)) {
+            echo '<li>';
+            echo $html->link('Profile', '/posts/user/'.$auth['id'].'');
+            echo '</li>';
+              //コントローラ、アクション、セッションをチェック
+              if($this->params['controller'] === 'posts'  && $this->params['action'] === 'user' && $this->params['pass'][0] == $user_info['User']['id'])
+              {
+                //echo "&nbsp;";
+                echo '<li>';
+                echo $html->link('Edit', '/users/edit/');
+                echo '</li>';
+              }
+        
+            echo '<li>';
+            echo $html->link('Logout', '/users/logout/');
+            echo '</li>';
           }
-        echo "&nbsp;";
-        echo $html->link('Logout', '/users/logout/');
-      }
-      //authなし
-      else
-      {
-        echo $html->link('start', '/users/add/');
-        echo "&nbsp;";
-        echo $html->link('Login', '/users/login/');
-      }
-    ?>
+          //authなし
+          else
+          {
+            echo '<li>';
+            echo $html->link('Start', '/users/add/');
+            echo '</li>';
+            echo '<li>';
+            echo $html->link('Login', '/users/login/');
+            echo '</li>';
+          }
+        ?>
+      </ul>
+    </div>
   </div>
-<br />
 </div>
