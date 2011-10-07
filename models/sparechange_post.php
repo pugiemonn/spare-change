@@ -20,19 +20,21 @@ class SparechangePost extends AppModel
       //
       'empty' => array(
         'rule'    => 'notEmpty',
+        'last'   => true,
         'message' => 'このフィールドは必ず入力してください。', 
       ),
       //数値形式の判定
       'numeric' => array(
         'rule'     => 'numeric',
-        'required' => true,
+        //'required' => true,
         'message'  => '数字をいれてください',
       ),
       //500円から10万円まで
       'range' => array(
-        'rule' => array('range', 499.5, 100000.1),
-        'message' => '500以上100000以下の自然数を半角で入力してください'
+        'rule' => array('range', 299.5, 100000.1),
+        'message' => '300以上100000以下の自然数を半角で入力してください'
       ),
+
     )
   );
 
