@@ -1,9 +1,17 @@
+<section class="posts-index">
+  <div class="page-header">
+    <h1>投稿一覧
+      <small>
+        お金を欲しがっている投稿の一覧です。
+      </small>
+    </h1>
+  </div>
 <?php
 //pr($example);
 ?>
 <ul>
   <li>
-    <?php echo $html->link("欲しい額を投稿する", "/posts/add");?>
+    <?php echo $html->link("欲しい額を投稿する", "/posts/add", array('class' => 'btn primary'));?>
   </li>
 <!--
   <?php if($this->Session->read("auth")){

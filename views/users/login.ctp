@@ -1,27 +1,38 @@
+<section class="">
+  <div class="page-header">
+    <h1>ログイン
+      <small>
+        
+      </small>
+    </h1>
+  </div>
 <?php
 echo $form->create('User', array('type' => 'post', 'url' => '/users/login_cmp'));
-echo $form->input('mail', array());
-//echo $form->error('User.mail');
-echo $form->input('password', array('label' => 'パスワード'));
+echo $form->input('mail', array(
+    'div' => array(
+      'class' => 'clearfix',
+    ),
+  )
+);
+echo $form->input('password', 
+  array(
+    'label' => 'パスワード',
+    'div'   => array(
+      'class' => 'clearfix',
+    )
+  )
+);
 //echo $form->error('password');
-echo $form->end('ログイン');
+echo $form->submit('ログイン',
+  array(
+    'type'  => 'submit', 
+    'class' => 'btn primary',
+    'div'   => array(
+      'class' => 'actions'
+    ),
+  )
+);
+echo $form->end();
 
 ?>
-
-<!--
-<form action="/users/login_cmp" method="POST">
-メールアドレス
-<input type="text" name="mail" />
-<br />
-パスワード
-<input type="password" name="password" />
-<br />
-<?php
-if($login_error == true)
-{
-  echo "メールアドレスまたはパスワードが違います";
-}
-?>
-<input type="submit" value="ログイン" />
-</form>
--->
+</section>

@@ -25,4 +25,7 @@ foreach($users as $user)
 }
 ?>
 </div>
+<?php
+echo $paginator->numbers(true);
+?>
 
