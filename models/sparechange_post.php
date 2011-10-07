@@ -17,6 +17,11 @@ class SparechangePost extends AppModel
       )
     ),
     'cost'    => array(
+      //
+      'empty' => array(
+        'rule'    => 'notEmpty',
+        'message' => 'このフィールドは必ず入力してください。', 
+      ),
       //数値形式の判定
       'numeric' => array(
         'rule'     => 'numeric',
