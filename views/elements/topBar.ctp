@@ -5,15 +5,17 @@
       <a href="/" class="brand">SpareChange</a> 
       <ul class="nav">
         <?php
+          
           echo '<li>';
-          echo $html->link('Home', '/');
+          echo $html->link('ホーム', '/');
           echo '</li>';
+          
         ?>
         <?php
           //authがある場合
           if(isset($auth)) {
             echo '<li>';
-            echo $html->link('Profile', '/posts/user/'.$auth['id'].'');
+            echo $html->link('マイ情報', '/posts/user/'.$auth['id'].'');
             echo '</li>';
             /*
               //コントローラ、アクション、セッションをチェック
@@ -26,17 +28,17 @@
               }
             */
             echo '<li>';
-            echo $html->link('Logout', '/users/logout/');
+            echo $html->link('ログアウト', '/users/logout/');
             echo '</li>';
           }
           //authなし
           else
           {
             echo '<li>';
-            echo $html->link('Start', '/users/add/');
+            echo $html->link('新規登録', '/users/add/');
             echo '</li>';
             echo '<li>';
-            echo $html->link('Login', '/users/login/');
+            echo $html->link('ログイン', '/users/login/');
             echo '</li>';
           }
         ?>
