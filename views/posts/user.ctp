@@ -1,16 +1,3 @@
-<!--
-<ul>
-  <li>
-    <?php echo $html->link("欲しい額を投稿する", "/posts/add");?>
-  </li>
-  <li>
-    <?php echo $html->link("投稿一覧", "/posts/" );?>
-  </li>
-  <li>
-    <?php echo $html->link("ユーザー一覧", "/users/" );?>
-  </li>
-</ul>
--->
 <section class="posts-user">
   <div class="page-header">
     <h1><?php echo $user_info['User']['name']; ?>
@@ -31,27 +18,39 @@
       <?php //echo $html->link("".h($user_info['User']['name'])."", "/posts/user/".$user_info['User']['id'].""); ?>
     </div>-->
     <div class="profileAccount">
-      <?php echo h($user_info['User']['account']); ?>
+      <h3>口座情報
+        <small>
+         
+          <?php
+            if($this->params['controller'] === 'posts'  && $this->params['action'] === 'user' && $this->params['pass'][0] == $auth['id'])
+            { 
+              echo $html->link('編集→', '/users/edit/');
+            }
+          ?>
+        </small>
+      </h3>
+      <p><?php echo h($user_info['User']['account']); ?>
     </div>
-    <?php echo $html->link("欲しい額を投稿する", "/posts/add",array('class' => 'btn primary'));?>
   </div>
   <br class="clear" />
 </div>
 <div class="row show-grid" title="Default three column layout">
   <div class="span7">
-    <span class="user-info-title">欲しがっている金額合計</span><br /> 
+    <h3>欲しがっている金額合計</h3> 
     <span class="user-info-num"><?php echo h(number_format($user_data['amount'])); ?></span><span class="user-info-chara">円</span> 
   </div>
   <div class="span4">
-    <span class="user-info-title">投稿数</span><br />
+    <h3>投稿数</h3>
     <span class="user-info-num"><?php echo h(number_format($user_data['count'])); ?></span><span class="user-info-chara">件</span>
   </div>
   <div class="span5">
-    <span class="user-info-title">平均金額 </span><br />
+    <h3>平均金額 </h3>
     <span class="user-info-num"><?php echo h(number_format($user_data['average'])); ?></span><span class="user-info-chara">円</span>
   </div>
 </div>
-<br />
+<div class="btnArea">
+    <?php echo $html->link("欲しい額を投稿する", "/posts/add",array('class' => 'btn primary'));?>
+</div>
 <?php
 foreach($post_list as $post) {
 ?>

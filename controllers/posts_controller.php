@@ -32,7 +32,6 @@ class PostsController extends AppController {
   );
 */
   function index() {
-
     //pr($this->paginate());
     //pr($this->paginate);
     //アクション名を取得
@@ -117,6 +116,7 @@ class PostsController extends AppController {
     //投稿のidを渡す
     $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`user_id`' => $id)));
     $post_list = $this->SparechangePost->find($options[0], $options[1]);
+    $this->set('auth', $this->Session->read('auth'));
     $this->set('user_info', $this->User->find('first', array('conditions' => array('`User`.`id`' => $id))));
     $this->set(compact('user_data'));
     $this->set('post_list', $post_list);
