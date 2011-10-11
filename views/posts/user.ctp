@@ -1,6 +1,6 @@
 <section class="posts-user">
   <div class="page-header">
-    <h1><?php echo $user_info['User']['name']; ?>
+    <h1><?php echo h($user_info['User']['name']); ?>
       <small>
         の情報です。
       </small>
@@ -11,12 +11,6 @@
     <img src="/img/prof.gif" alt="prof-img" width="96" height="96" />
   </div>
   <div class="profileDetails">
-    <!--
-    <div class="profileName">
-      <?php //pr($user_info); ?>
-      <?php //echo $html->link("".h($post_list[0]['User']['name'])."", "/posts/user/".$post_list[0]['SparechangePost']['user_id'].""); ?>
-      <?php //echo $html->link("".h($user_info['User']['name'])."", "/posts/user/".$user_info['User']['id'].""); ?>
-    </div>-->
     <div class="profileAccount">
       <h3>口座情報
         <small>
@@ -24,7 +18,7 @@
           <?php
             if($this->params['controller'] === 'posts'  && $this->params['action'] === 'user' && $this->params['pass'][0] == $auth['id'])
             { 
-              echo $html->link('編集→', '/users/edit/');
+              echo $html->link('編集>>', '/users/edit/');
             }
           ?>
         </small>
