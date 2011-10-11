@@ -1,6 +1,6 @@
 <section id="users-add">
   <div class="page-header">
-    <h1>ユーザー登録
+    <h1>新規ユーザー登録
       <small>
         登録をして何がおきても責任はとれません。
       </small>

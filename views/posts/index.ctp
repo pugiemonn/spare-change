@@ -63,7 +63,7 @@ unset($post_list);
 unset($post);
 ?>
 <?php
-//echo $paginator->numbers(true);
-//  echo $this->paginator->counter();
+//echo $this->paginator->numbers(true);
+//echo $this->paginator->counter();
 ?>
 

@@ -2,7 +2,7 @@
   <div class="page-header">
     <h1>ログイン
       <small>
-        
+        ログインすると情報を投稿できます。        
       </small>
     </h1>
   </div>

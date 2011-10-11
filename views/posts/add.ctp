@@ -13,7 +13,7 @@ echo $form->hidden('user_id', array('value' => ''.$auth_data["id"].''));
 echo $this->Html->div(''. $form->error('SparechangePost.cost') ? "clearfix error" : "clearfix" .'', null, array());
 echo $form->input('cost', 
   array(
-    'label' => '金額(500~10万円)',
+    'label' => '金額(300~10万円)',
     'div'   => false,
   )
 );
@@ -47,6 +47,7 @@ echo $form->submit('投稿',
   )
 );
 echo '&nbsp;';
+/*
 echo $form->button('キャンセル',
   array(
     'type'  => 'reset',
@@ -54,6 +55,7 @@ echo $form->button('キャンセル',
     'div'   => false,
   )
 );
+*/
 echo "</div>";
 echo $form->end();
 ?>
