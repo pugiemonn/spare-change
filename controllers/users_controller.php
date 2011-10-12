@@ -77,12 +77,18 @@ class UsersController extends Appcontroller {
       //ユーザーデータの書き込み
       if($this->User->save($this->data, array('validate' => false)))
       {
+        $options = array(
+          'conditions' => array(
+            'User.mail'     => $this->data['User']['mail'],
+            'User.password' => $this->data['User']['password'],
+          ),
+        );
         //登録されたデータを取得
-        $user_data  = $this->User->find('first', $options[1]);
+        $user_data  = $this->User->find('first', $options);
         //セッションへ書き込み
         $this->Session->write('auth', $user_data['User']);
         //ユーザーのページへリダイレクト
-        $this->flash('ユーザー登録が完了しました。', '/posts/user/'.$user_data['User']['id'].'');
+        $this->flash('ユーザー登録が完了しました。', '/posts/user/'.$user_data['User']['id']);
         //returnと書くといいですね。
         return ;
       }
@@ -115,7 +121,7 @@ class UsersController extends Appcontroller {
       //保存      
       if($this->User->save($this->data['User']))
       {
-        $this->flash('更新されました', '/posts/user/'.$user_data['id'].'');
+        $this->flash('更新されました', '/posts/user/'.$user_data['id']);
         return;
       }
     } 
@@ -131,12 +137,6 @@ class UsersController extends Appcontroller {
 
   function login_cmp()
   {
-    $conditions = array(
-      'conditions' => array(
-        'User.mail'     => $this->data['User']['mail'],
-        'User.password' => $this->data['User']['password']
-      )
-    );
     $data = array(
         'mail'     => $this->data['User']['mail'],
         'password' => $this->data['User']['password']
@@ -149,6 +149,13 @@ class UsersController extends Appcontroller {
       return ;
     }
 
+    $conditions = array(
+      'conditions' => array(
+        'User.mail'     => $this->data['User']['mail'],
+        'User.password' => Security::hash(SALT.$this->data['User']['password'])
+      )
+    );
+    //ここでログインできるかを判定している
     $data = $this->User->find('all', $conditions);
     //データがあるかをチェックする
     if(count($data) == 0)
@@ -161,7 +168,7 @@ class UsersController extends Appcontroller {
     $this->Session->write('auth', $data[0]['User']);
     //pr($this->Session->read('auth'));
     //
-    $this->flash('ログイン成功', '/posts/user/'.$data[0]['User']['id'].'');
+    $this->flash('ログイン成功', '/posts/user/'.$data[0]['User']['id']);
   }
 
   function logout()
