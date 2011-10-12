@@ -15,7 +15,7 @@
           //authがある場合
           if(isset($auth)) {
             echo '<li>';
-            echo $html->link('マイ情報', '/posts/user/'.$auth['id'].'');
+            echo $html->link('マイ情報', '/posts/user/'.h($auth['id']).'');
             echo '</li>';
             /*
               //コントローラ、アクション、セッションをチェック
