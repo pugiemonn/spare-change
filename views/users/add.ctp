@@ -8,14 +8,19 @@
   </div>
 <?php
 echo $form->create('User');
+echo $this->Html->div(''. $form->error('User.name') || isset($nameOverlap) ? "clearfix error" : "clearfix" .'', null, array());
 echo $form->input('name',
   array(
     'class' => 'xlarge',
-    'div'   => array(
-      'class' => 'clearfix',
-    )
+    //divを非表示
+    'div'   => false,
   )
 );
+if(isset($nameOverlap) && $nameOverlap === true)
+{
+  echo '<div class="error-message">名前が重複しています。</div>';
+}
+echo '</div>';
 //User.mailと$mailOverlapのときにerrorとして表示する
 echo $this->Html->div(''. $form->error('User.mail') || isset($mailOverlap) ? "clearfix error" : "clearfix" .'', null, array());
 echo $form->input('mail', array(
