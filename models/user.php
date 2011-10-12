@@ -5,7 +5,7 @@ class User extends AppModel {
     'SparechangePost' => array(
       'className'  => 'SparechangePost',
       'foreignKey' => 'user_id',
-      'limit'      => '20',
+      'limit'      => '10',
       //'foreignKey'    => 'user_id',
       //'conditions' => array('SparechangePost.id' => 'DESC'),
       //'order'      => 'SparechangePost.id DESC',
@@ -46,11 +46,11 @@ class User extends AppModel {
  //       'required' => true,
         'message' => '半角英数字を入力してください'
       ),
-/*      'between' => array(
-        'rule'    => array('between', 5, 15), 
-        'message' => '5文字から15文字までを入力してください',
+      'between' => array(
+        'rule'    => array('between', 4, 15), 
+        'message' => '4文字から15文字までを入力してください',
       ),
-*/
+
     ),
     'account'  => array(
       'rule'    => array('between', 0, 200),
@@ -65,6 +65,26 @@ class User extends AppModel {
         return parent::find('find', array_merge(
           array(
             //'fields' => array('id', 'name', 'mail'), 
+          ),
+          $options
+          )
+        );
+      case 'name':
+        return parent::find('count', array_merge(
+          array(
+            'conditions' => array(
+            '`User`.`name`'     => $this->data['User']['name'],
+          )
+          ),
+          $options
+          )
+        );
+      case 'mail':
+        return parent::find('count', array_merge(
+          array(
+            'conditions' => array(
+            '`User`.`mail`'     => $this->data['User']['mail'],
+          )
           ),
           $options
           )

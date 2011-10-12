@@ -1,30 +1,38 @@
 <?php
 class UsersController extends Appcontroller {
-  var $name = "User";
-  var $scaffold;
+  var $name = "Users";
+  //var $scaffold;
   var $paginate = array(
-    'limit' => 2,
-    'order' => array(
-      'User.id' => 'desc'
-    ) 
+    'User' => array(
+      'fields' => array('User.id', 'User.created'),
+      'limit' => 10,
+      'order' => array(
+        'User.id' => 'desc'
+      )
+    )
   );
 
   protected $_types = array(
-    'add' => array('add', array()),
+    'add'  => array('add', array()),
+    'name' => array('name', array()), 
+    'mail' => array('mail', array()), 
   );
+
+  //var $components = array('Auth');
 
   function index()
   {
-    $this->set('users', $this->paginate());
+    //$this->set('users', $this->paginate());
     $options = array(
       //'conditons' =>
       'fields' => array(
         'User.id',
         'User.name',
       ),
-      'limit'  => '2',
+      'limit'  => '10',
     );
     $this->set('users', $this->User->find('all', $options));
+    $this->data = $this->paginate('User');
     //pr($this->User->find('all'));
     $this->render('/users/index');
   }
@@ -33,27 +41,28 @@ class UsersController extends Appcontroller {
     if(!empty($this->data)) {
       //モデルにdataをセット
       $this->User->set($this->data);
+      //入力チェック
       if(!$this->User->validates())
       {
         //入力に不備が合った場合の処理
         $this->render('/users/add');
         return;
       }
-
-      //pr($this->data);
       //アクションを判定する
       $options = $this->_types[$this->params['action']];
-      $options[1] = array_merge($options[1], array(
-        'conditions' => array(
-          '`User`.`mail`'     => $this->data['User']['mail'],
-            //'`User`.`password`' => $this->data['User']['password'],
-        )
-        )
-      );
+
+      //名前が登録されているかをチェックする 
+      $count = $this->User->find('name', array());
+      if($count >= 1)
+      {
+        //名前が重複している
+        $this->set('nameOverlap', true); 
+        $this->render('/users/add');
+        return ;
+      }
+
       //メールアドレスが登録されているかをチェックする
-      //$count = $this->User->find($options[0], $options[1]);
-      $count = $this->User->find('count', $options[1]);
-      //pr($count);
+      $count = $this->User->find('mail', array());
       if($count >= 1)
       {
         //メールアドレスが重複している
@@ -61,16 +70,17 @@ class UsersController extends Appcontroller {
         $this->render('/users/add');
         return ;
       }
-      //exit("aaaaa");  
+
+      //パスワードのハッシュ化
+      $this->data['User']['password'] = SALT.$this->data['User']['password'];
+      $this->data['User']['password'] = Security::hash($this->data['User']['password']);
       //ユーザーデータの書き込み
-      if($this->User->save($this->data))
+      if($this->User->save($this->data, array('validate' => false)))
       {
+        //登録されたデータを取得
         $user_data  = $this->User->find('first', $options[1]);
-        //pr($user_data);
-        //exit("bbb");  
         //セッションへ書き込み
         $this->Session->write('auth', $user_data['User']);
-        
         //ユーザーのページへリダイレクト
         $this->flash('ユーザー登録が完了しました。', '/posts/user/'.$user_data['User']['id'].'');
         //returnと書くといいですね。
@@ -87,7 +97,6 @@ class UsersController extends Appcontroller {
     //セッションデータを読み込み
     $user_data = $this->Session->read('auth');
     //pr($user_data); 
-    //$this->set(compact(user_data));
     if(empty($this->data))
     {
       //フォームから入力が無い場合
@@ -110,7 +119,6 @@ class UsersController extends Appcontroller {
         return;
       }
     } 
-    //pr($this->data);
     $this->render('/users/edit');  
   }
 
