@@ -24,8 +24,8 @@ class User extends AppModel {
         'message'  => '半角英数字を入力してください',
       ),
       'between' => array(
-        'rule'    => array('between', 5, 15), 
-        'message' => '5文字から15文字までにしてください',
+        'rule'    => array('between', 3, 15), 
+        'message' => '3文字から15文字までにしてください',
       ),
     ),
     
