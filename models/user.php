@@ -36,7 +36,7 @@ class User extends AppModel {
       ),
       'isMail' => array(
         'rule'    => 'email',
-        'message' => 'メールアドレスを入力してください。'
+        'message' => '有効なメールアドレスを入力してください。'
       ),
     ),
 
