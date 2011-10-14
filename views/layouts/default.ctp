@@ -34,7 +34,20 @@
 		echo $scripts_for_layout;
 	?>
 
+<script type="text/javascript">
 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2157335-16']);
+  _gaq.push(['_setDomainName', '.chocospot.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </head>
 <body>
 <div id="">
@@ -44,6 +57,7 @@
   <div class="container">
     <?php echo $content_for_layout; ?>
   </div>
+        <!--
 		<div id="">
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
@@ -51,7 +65,7 @@
 					array('target' => '_blank', 'escape' => false)
 				);
 			?>
-		</div>
+		</div>-->
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 </body>
