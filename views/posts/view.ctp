@@ -1,21 +1,15 @@
-<ul>
-  <li>
-    <?php echo $html->link("欲しい額を投稿する", "/posts/add");?>
-  </li>
+  <ul>
+    <li>
+      <?php echo $html->link("欲しい額を投稿する", "/posts/add", array('class' => 'btn primary'));?>
+    </li>
+  </ul>
 <!--
-  <?php if($this->Session->read("auth")){
-    $auth_data = $this->Session->read("auth");
-  ?>
-  <li>
-    <?php echo $html->link("自分の投稿", "/posts/user/".$auth_data['id']."" );?>
-  </li>
-  <?php } ?>
-  <li>
-    <?php echo $html->link("ユーザー一覧", "/users/" );?>
-  </li>
--->
-</ul>
-<br />
+  <br />
+  <ul class="tabs">
+    <li><a href="/">投稿一覧</a></li>
+    <li><a href="/users/">新着ユーザー</a></li>
+  </ul>-->
+  <br class="clear" />
 <?php
 foreach($post_list as $post) {
 ?>
