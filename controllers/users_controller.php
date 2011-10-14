@@ -29,7 +29,10 @@ class UsersController extends Appcontroller {
         'User.id',
         'User.name',
       ),
-      'limit'  => '10',
+      'order' => array(
+        'User.id' => 'desc'
+      ),
+      'limit'  => '20',
     );
     $this->set('users', $this->User->find('all', $options));
     $this->data = $this->paginate('User');
