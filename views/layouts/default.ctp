@@ -31,7 +31,9 @@
 		echo $this->Html->css(array('sparechange', 'bootstrap'));
 		echo $scripts_for_layout;
 	?>
-
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
