@@ -38,6 +38,15 @@ class PostsController extends AppController {
       'average' => 0,
   );
 */
+  var $components = array('Security');
+
+  function beforeFilter() {
+    //CSRF対策
+    parent::beforeFilter();
+    $this->Security->requireAuth('add');
+  }
+
+
   function index() {
     //pr($this->paginate());
     //pr($this->paginate);
