@@ -18,7 +18,14 @@ class UsersController extends Appcontroller {
     'mail' => array('mail', array()), 
   );
 
-  //var $components = array('Auth');
+  var $components = array('Security');
+
+  function beforeFilter() {
+    //CSRF対策
+    parent::beforeFilter();
+    $this->Security->requireAuth('edit');
+  }
+
 
   function index()
   {
