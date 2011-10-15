@@ -3,6 +3,7 @@ class PostsController extends AppController {
 
   var $uses = array("SparechangePost", "User");
   var $sacaffold;
+/*
   var $paginate = array(
     'limit' => 20,
     //'order' => array('SparechangePost.id' => 'asc'),
@@ -15,7 +16,13 @@ class PostsController extends AppController {
          'conditions' => '`User`.`id`=`SparechangePost`.`user_id`',
        )
      )
- 
+  );
+*/
+
+  var $paginate = array(
+    
+    'limit' => 20,
+    //'order' => array('SparechangePost.id' => 'asc'),
   );
 
   protected $_types = array(
@@ -41,6 +48,7 @@ class PostsController extends AppController {
     //$this->paginate = $conditions;
     //$this->set('data', $this->paginate());
     //$post_list = $this->paginate();
+    $this->set('title_for_layout', SpareChangeTitle);
     $this->set(compact('post_list'));
   }
 
@@ -51,6 +59,7 @@ class PostsController extends AppController {
     //pr($auth_data);
     //echo $auth_data['id'];
     $this->set('auth_data', $auth_data);
+    $this->set('title_for_layout', '欲しい額を投稿 | '.SpareChangeTitle);
     //書き込み
     if(!empty($this->data))
     {
@@ -115,11 +124,13 @@ class PostsController extends AppController {
     $options  = $this->_types[$this->params['action']];
     //投稿のidを渡す
     $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`user_id`' => $id)));
+    $user_info = $this->User->find('first', array('conditions' => array('`User`.`id`' => $id)));
     $post_list = $this->SparechangePost->find($options[0], $options[1]);
     $this->set('auth', $this->Session->read('auth'));
-    $this->set('user_info', $this->User->find('first', array('conditions' => array('`User`.`id`' => $id))));
+    $this->set('title_for_layout', $user_info['User']['name'].'の情報 | '.SpareChangeTitle);
+    $this->set(compact('user_info'));
     $this->set(compact('user_data'));
-    $this->set('post_list', $post_list);
+    $this->set(compact('post_list'));
   }
 
   function view($id=null)
@@ -128,6 +139,7 @@ class PostsController extends AppController {
     //投稿のidを渡す
     $options[1] = array_merge($options[1], array('conditions' => array('`SparechangePost`.`id`' => $id)));
     $post_list = $this->SparechangePost->find($options[0], $options[1]);
+    $this->set('title_for_layout', number_format($post_list[0]['SparechangePost']['cost']).'円( ﾟдﾟ)ﾎｽｨ… | '.SpareChangeTitle);
     $this->set(compact('post_list'));
   }  
 

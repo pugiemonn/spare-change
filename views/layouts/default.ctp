@@ -22,15 +22,13 @@
 <head>
 	<?php echo $this->Html->charset('utf-8'); ?>
 	<title>
-		<?php __('CakePHP: the rapid development php framework:'); ?>
-		<?php echo $title_for_layout; ?>
+		<?php //__('CakePHP: the rapid development php framework:'); ?>
+		<?php echo h($title_for_layout); ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-
 		//echo $this->Html->css(array('cake.generic', 'sparechange'));
 		echo $this->Html->css(array('sparechange', 'bootstrap'));
-
 		echo $scripts_for_layout;
 	?>
 
