@@ -35,12 +35,13 @@ class UsersController extends Appcontroller {
       'limit'  => '20',
     );
     $this->set('users', $this->User->find('all', $options));
+    $this->set('title_for_layout', '新着ユーザー | '.SpareChangeTitle);
     $this->data = $this->paginate('User');
-    //pr($this->User->find('all'));
     $this->render('/users/index');
   }
 
   function add() {
+    $this->set('title_for_layout', 'ユーザー登録 | '.SpareChangeTitle);
     if(!empty($this->data)) {
       //モデルにdataをセット
       $this->User->set($this->data);
@@ -133,6 +134,7 @@ class UsersController extends Appcontroller {
 
   function login()
   {
+    $this->set('title_for_layout', 'ログイン | '.SpareChangeTitle);
     $this->set("login_error", false); //初期表示時はエラー無しとする    
     //これを入れないと/user/loginを見に行く
     $this->render("/users/login");
@@ -144,6 +146,7 @@ class UsersController extends Appcontroller {
         'mail'     => $this->data['User']['mail'],
         'password' => $this->data['User']['password']
       );
+    $this->set('title_for_layout', 'ログイン | '.SpareChangeTitle);
     //validateするために値をセットする
     $this->User->set($data);
     if(!$this->User->validates()) {
