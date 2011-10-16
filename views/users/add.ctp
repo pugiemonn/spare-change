@@ -1,8 +1,8 @@
 <section id="users-add">
   <div class="page-header">
-    <h1>新規ユーザー登録
+    <h1>新規登録
       <small>
-        登録をして何がおきても責任はとれません。
+        ユーザー登録を行います。
       </small>
     </h1>
   </div>

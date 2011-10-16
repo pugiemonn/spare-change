@@ -1,6 +1,6 @@
 <section class="users-edit">
   <div class="page-header">
-    <h1>情報の編集
+    <h1>編集
       <small>
         口座情報を登録すれば、運よくお金が振り込まれるかもしれません。
       </small>
