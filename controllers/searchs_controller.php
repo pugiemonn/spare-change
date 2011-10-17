@@ -6,7 +6,6 @@ class SearchsController extends AppController {
   //検索アクション
   function index() {
     if(isset($this->params['url']['keyword'])) {
-      echo"jpge";
       $options = array(
         'conditions' => array(
           'SparechangePost.comment LIKE' => '%'.$this->params['url']['keyword'].'%',
