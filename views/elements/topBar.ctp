@@ -10,6 +10,11 @@
           echo $html->link('ホーム', '/');
           echo '</li>';
           
+/*
+          echo '<li>';
+          echo $html->link('当サイトについて', '/supports');
+          echo '</li>';
+*/
         ?>
         <?php
           //authがある場合
@@ -42,6 +47,27 @@
             echo '</li>';
           }
         ?>
+      </ul>
+      <ul class="nav secondary-nav">
+        <li class="">
+          <?php
+            echo $form->create('Searchs', 
+              array(
+                //'url'    => '/searchs/',
+                'type'   => 'get',
+                'class'  => 'pull-left',
+              )
+            );
+            echo $form->input('keyword', 
+              array(
+                'placeholder' => '検索',
+                'label'       => false, 
+                'div'         => false,
+              )
+            );
+            echo $form->end();
+          ?>
+        </li>
       </ul>
     </div>
   </div>
