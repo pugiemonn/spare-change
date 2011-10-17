@@ -6,17 +6,16 @@
       </small>
     </h1>
   </div>
-  <ul>
-    <li>
-      <?php echo $html->link("欲しい額を投稿する", "/posts/add", array('class' => 'btn primary'));?>
-    </li>
-  </ul>
-  <br />
   <ul class="tabs">
     <li class="active"><a href="/">投稿一覧</a></li>
     <li><a href="/users/">新着ユーザー</a></li>
   </ul>
   <br class="clear" />
+  <ul>
+    <li>
+      <?php echo $html->link("欲しい額を投稿する", "/posts/add", array('class' => 'btn primary'));?>
+    </li>
+  </ul>
   <br />
 <?php
 foreach($post_list as $post) {
