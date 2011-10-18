@@ -25,14 +25,18 @@ class SparechangePost extends AppModel
       ),
       //数値形式の判定
       'numeric' => array(
-        'rule'     => 'numeric',
+        //'rule'     => 'numeric',
+        'rule'     => '/^\d+$/',
+        'last'   => true,
         //'required' => true,
         'message'  => '数字をいれてください',
       ),
+
       //500円から10万円まで
       'range' => array(
+        //'rule'    => array('custom', '/\d{3,5}/'),
         'rule' => array('range', 299.5, 100000.1),
-        'message' => '300以上100000以下の自然数を半角で入力してください'
+        'message' => '300以上100000未満の自然数を半角で入力してください'
       ),
 
     )
