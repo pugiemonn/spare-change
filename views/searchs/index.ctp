@@ -11,8 +11,8 @@
     <li class="active">検索：<?php echo h($this->params['url']['keyword']); ?></li>
   </ul>
   <ul class="tabs">
-    <li><a href="/">投稿一覧</a></li>
-    <li class=""><a href="/users/">新着ユーザー</a></li>
+    <li class="active"><a href="/">投稿一覧</a></li>
+    <li class="active"><a href="/users/">新着ユーザー</a></li>
   </ul>
   <ul>
     <li>
