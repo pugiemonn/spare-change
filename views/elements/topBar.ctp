@@ -10,11 +10,11 @@
           echo $html->link('ホーム', '/');
           echo '</li>';
           
-/*
+
           echo '<li>';
-          echo $html->link('当サイトについて', '/supports');
+          echo $html->link('サイトについて', '/supports');
           echo '</li>';
-*/
+
         ?>
         <?php
           //authがある場合
