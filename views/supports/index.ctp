@@ -1,6 +1,6 @@
 <section id="supports-index">
   <div class="page-header">
-    <h1>当サイトについて
+    <h1>サイトについて
       <small>
         どんなサイトか
       </small>
@@ -41,6 +41,8 @@
       <li>３. 振込を待つ
     </ol>
     <p>以降２と３を繰り返してください。
+    <h3>このサイトをつくっている人</h3>
+    <?php echo $this->Html->link('@pugieonn', 'http://twitter.com/#!/pugiemonn') ?>がつくってます。
   </div>
 <?php
 ?>
